@@ -18,7 +18,9 @@ let notesData = [];
 
 // Set up body parsing, static, and route middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(express.static(path.join(__dirname, "Develop/public")));
 
 // routes
@@ -60,14 +62,14 @@ app.post("/api/notes", function(req, res) {
     // writes the new note to file
     fs.writeFile("./Develop/db/db.json", notesData, "utf8", function(err) {
       // error handling
-      if (err) throw err;
+      if (err)
+        throw err;
     });
-    // changeit back to an array of objects & send it back to the browser(client)
+    // change back to an array of objects & send it back to the browser(client)
     res.json(JSON.parse(notesData));
     
     // error Handling
-  } catch (err) {
-    throw err;
+  } catch (err) {throw err;
     console.error(err);
   }
 });
